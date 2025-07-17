@@ -1,0 +1,31 @@
+# Node / CDS / CAP
+node_modules/
+gen/
+_out/
+target/
+*.db
+*.sqlite
+*.log
+*.orig
+*.iml
+*.flattened-pom.xml
+@cds-models
+connection.properties
+default-*.json
+.cdsrc-private.json
+
+# SAP MTA / MBT build
+*_mta_build_tmp/
+*.mtar
+mta_archives/
+
+# BAS / Web IDE
+.che/
+.gen/
+
+# OS / Misc
+.DS_Store
+
+# Optional IDE settings (keep if you don't want to share them)
+# .vscode/
+# .idea/

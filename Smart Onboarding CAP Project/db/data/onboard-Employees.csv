@@ -1,0 +1,26 @@
+ID;name;email;department;joinDate;status;role;gender;dob
+emp001;Alice Mathews;alice@company.com;HR;2025-06-01;Approved;HR Associate;Female;1990-02-15
+emp002;Rajiv Menon;rajiv@company.com;IT;2025-06-02;Pending;;Male;1988-08-22
+emp003;Fatima Noor;fatima@company.com;Finance;2025-04-10;Rejected;;Female;1992-04-11
+emp004;Daniel Kim;daniel@company.com;Sales;2025-05-25;Approved;Sales Executive;Male;1987-12-01
+emp005;John Xavier;john@company.com;IT;2025-03-18;Pending;;Male;1991-07-09
+emp006;Meera Iyer;meera@company.com;Finance;2024-07-20;Approved;Finance Analyst;Female;1989-06-25
+emp007;Kiran Das;kiran@company.com;HR;2024-05-12;Pending;;Male;1990-09-14
+emp008;Steve Paul;steve@company.com;IT;2023-11-15;Rejected;;Male;1986-03-11
+emp009;Julia Singh;julia@company.com;Sales;2023-08-01;Approved;Sales Manager;Female;1984-01-20
+emp010;Brian Joseph;brian@company.com;Finance;2023-04-05;Pending;;Male;1985-05-05
+emp011;Rita Banerjee;rita@company.com;HR;2022-12-10;Approved;HR Manager;Female;1982-11-11
+emp012;Nitin Verma;nitin@company.com;IT;2022-09-10;Rejected;;Male;1990-02-19
+emp013;Leah Gomez;leah@company.com;Sales;2022-06-22;Approved;Sales Executive;Female;1983-07-07
+emp014;Vinod Patel;vinod@company.com;Finance;2023-01-25;Pending;;Male;1992-10-10
+emp015;Anjali Sharma;anjali@company.com;HR;2023-03-03;Rejected;;Female;1994-04-04
+emp016;Mohit Rao;mohit@company.com;IT;2024-10-15;Approved;Developer;Male;1993-08-08
+emp017;Sana Khan;sana@company.com;Finance;2024-01-12;Pending;;Female;1996-12-12
+emp018;Chris Evans;chris@company.com;Sales;2023-05-02;Approved;Account Manager;Male;1981-06-21
+emp019;Elina Joseph;elina@company.com;HR;2022-08-29;Approved;HR Executive;Female;1995-02-02
+emp020;Amit Mishra;amit@company.com;IT;2022-05-10;Rejected;;Male;1989-11-11
+emp021;Tina Lopez;tina@company.com;Sales;2023-09-09;Pending;;Female;1987-03-03
+emp022;Paul Hudson;paul@company.com;Finance;2025-01-05;Approved;Financial Controller;Male;1980-12-12
+emp023;Sophie Dutta;sophie@company.com;HR;2025-02-15;Pending;;Female;1997-07-07
+emp024;Arun Bhatt;arun@company.com;IT;2025-03-30;Rejected;;Male;1983-10-10
+emp025;Lilly Chen;lilly@company.com;Finance;2024-08-08;Approved;Finance Executive;Female;1998-01-01

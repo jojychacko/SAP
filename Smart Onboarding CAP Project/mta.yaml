@@ -1,0 +1,130 @@
+_schema-version: "3.3.0"
+ID: smart-onboard-demo
+description: A simple CAP project for onboarding
+version: 1.0.0
+
+modules:
+  - name: smart-onboard-demo-srv
+    type: nodejs
+    path: gen/srv
+    requires:
+      - name: smart-onboard-demo-db
+      - name: xsuaa-service
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    parameters:
+      buildpack: nodejs_buildpack
+      env:
+        OPENAI_API_KEY: sk-proj-actual_key
+    build-parameters:
+      build-result: .
+      builder: custom
+      commands:
+        - npm install
+
+  - name: smart-onboard-demo-db-deployer
+    type: hdb
+    path: gen/db
+    requires:
+      - name: smart-onboard-demo-db
+
+  - name: smart-onboard-demo
+    type: approuter.nodejs
+    path: app/router
+    requires:
+      - name: xsuaa-service
+      - name: srv-api
+        group: destinations
+        properties:
+          forwardAuthToken: true
+          name: srv-api
+          url: ~{srv-url}
+      - name: smart-onboard-demo-html5-runtime
+      - name: smart-onboard-demo-destination
+    provides:
+      - name: app-api
+        properties:
+          app-protocol: ${protocol}
+          app-uri: ${default-uri}
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+      keep-existing-routes: true
+
+  - name: comsmartui
+    type: html5
+    path: app/onboard-ui
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      build-result: dist
+      supported-platforms: []
+    provides:
+      - name: ui5-content-provider
+
+  - name: smart-onboard-demo-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: smart-onboard-demo-repo-host
+        parameters:
+          content-target: true
+      - name: ui5-content-provider
+    build-parameters:
+      build-result: resources
+      requires:
+        - name: comsmartui
+          artifacts:
+            - comsmartui.zip
+          target-path: resources/
+
+resources:
+  - name: smart-onboard-demo-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+
+  - name: xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-plan: application
+
+  - name: smart-onboard-demo-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+      service-name: smart-onboard-demo-html5-service
+
+  - name: smart-onboard-demo-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
+
+  - name: smart-onboard-demo-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            destinations:
+              - Name: ui5
+                URL: https://ui5.sap.com
+                ProxyType: Internet
+                Type: HTTP
+                Authentication: NoAuthentication
+      existing_destinations_policy: update
+      service: destination
+      service-plan: lite
+
+parameters:
+  enable-parallel-deployments: true

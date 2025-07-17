@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SmartHire Assistant</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    #chatbox {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 10px;
+      height: 70vh;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      font-family: Arial, sans-serif;
+    }
+
+    .user-msg, .bot-msg {
+      margin: 1rem 0;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      max-width: 70%;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .user-msg {
+      background-color: #c62828;
+      color: white;
+      text-align: right;
+      margin-left: auto;
+    }
+
+    .bot-msg {
+      background-color: #e0e0e0;
+      color: #000;
+      text-align: left;
+    }
+
+    #chat-input {
+      display: flex;
+      max-width: 800px;
+      margin: 1rem auto;
+      gap: 0.5rem;
+    }
+
+    #chat-input input {
+      flex: 1;
+      padding: 0.8rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    #chat-input button {
+      background-color: #c62828;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #f9f9f9;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #ffffff;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 10px;
+    }
+
+    .pagination button {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      cursor: pointer;
+    }
+
+    .pagination button.active {
+      background-color: #c62828;
+      color: #fff;
+      border-color: #c62828;
+    }
+
+    @media (max-width: 600px) {
+      #chatbox, #chat-input {
+        width: 90%;
+      }
+      .user-msg, .bot-msg {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <img src="https://accrevent.com/wp-content/uploads/2024/02/Accrevent-Black-logo-2048x621.png" class="logo" />
+    <h1 class="app-title">SmartHire Assistant</h1>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="create.html">New Onboarding</a>
+      <a href="list.html">View Employees</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="chatbot.html">Chat Assistant</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </header>
+
+  <div id="chatbox"></div>
+
+  <div id="chat-input">
+    <input type="text" id="query" placeholder="Ask me anything..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <footer>
+    © Accrevent SmartHire 2025 | All rights reserved
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("navMenu");
+      menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+    }
+
+    const box = document.getElementById("chatbox");
+
+    function appendMessage(text, type, isHTML = false) {
+      const div = document.createElement("div");
+      div.className = type === "user" ? "user-msg" : "bot-msg";
+      if (isHTML) {
+        div.innerHTML = text;
+      } else {
+        div.innerText = text;
+      }
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function formatAsHTMLTable(data, page = 1, pageSize = 5) {
+      if (!data || !data.length) return "<p>No records found.</p>";
+
+      const keys = Object.keys(data[0]);
+      const start = (page - 1) * pageSize;
+      const end = start + pageSize;
+      const pageData = data.slice(start, end);
+
+      let html = '<table>';
+      html += '<thead><tr>' + keys.map(k => `<th>${k}</th>`).join('') + '</tr></thead>';
+      html += '<tbody>';
+      pageData.forEach(row => {
+        html += '<tr>' + keys.map(k => `<td>${row[k] ?? ''}</td>`).join('') + '</tr>';
+      });
+      html += '</tbody></table>';
+
+      const totalPages = Math.ceil(data.length / pageSize);
+      if (totalPages > 1) {
+        html += '<div class="pagination">';
+        for (let i = 1; i <= totalPages; i++) {
+          html += `<button class="${i === page ? 'active' : ''}" onclick="renderPage(${i})">${i}</button>`;
+        }
+        html += '</div>';
+      }
+
+      return html;
+    }
+
+    let currentData = [];
+
+    function renderPage(page) {
+      const formattedTable = formatAsHTMLTable(currentData, page);
+      appendMessage(formattedTable, "bot", true);
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("query");
+      const text = input.value.trim();
+      if (!text) return;
+
+      appendMessage(text, "user");
+      input.value = "";
+
+      appendMessage("Typing...", "bot");
+
+      try {
+        const res = await fetch("/chatgpt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text })
+        });
+
+        const response = await res.json();
+        box.lastChild.remove(); // remove "Typing..."
+
+        if (response.reply) {
+          appendMessage(response.reply, "bot");
+        } else if (response.data) {
+          currentData = response.data;
+          const formattedTable = formatAsHTMLTable(currentData);
+          appendMessage(formattedTable, "bot", true);
+        } else {
+          appendMessage("No response received.", "bot");
+        }
+
+      } catch (e) {
+        box.lastChild.remove();
+        appendMessage("Error: Unable to reach assistant.", "bot");
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+/* GENERAL PAGE STYLING */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    text-align: center;
+    min-height: 100vh;
+    padding-bottom: 60px;
+}
+  
+/* HEADER STYLING */
+.header {
+    background-color: #c62828;
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    position: relative;
+}
+  
+.logo {
+    height: 40px;
+    max-width: 180px;
+    object-fit: contain;
+    background-color: white;
+    padding: 4px;
+    border-radius: 6px;
+}
+  
+.app-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0;
+}
+  
+.menu-icon {
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+  
+/* NAVIGATION MENU */
+.nav-menu {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background-color: white;
+    color: #c62828;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: none;
+    flex-direction: column;
+    z-index: 1001;
+}
+  
+.nav-menu a {
+    padding: 0.7rem 1.2rem;
+    text-decoration: none;
+    color: #c62828;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+  
+.nav-menu a:last-child {
+    border-bottom: none;
+}
+  
+.nav-menu a:hover {
+    background-color: #fce4ec;
+}
+  
+/* TILE BUTTONS */
+.tile-container {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+  
+.tile {
+    background-color: #ffffff;
+    color: #c62828;
+    border: 2px solid #c62828;
+    border-radius: 16px;
+    padding: 2rem 3rem;
+    width: 200px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+  
+.tile:hover {
+    background-color: #c62828;
+    color: white;
+    transform: scale(1.05);
+}
+  
+/* FOOTER */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #c62828;
+    color: white;
+    text-align: center;
+    padding: 0.6rem 0;
+    font-size: 0.85rem;
+    z-index: 1000;
+}
+  
+/* TABLE STYLING */
+table {
+    width: 90%;
+    margin: 2rem auto;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+  
+th, td {
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+}
+  
+th {
+    background-color: #fbe9e7;
+    color: #c62828;
+}
+  
+button {
+    background-color: #c62828;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0.2rem;
+}
+  
+button:hover {
+    background-color: #b71c1c;
+}
+  
+/* DASHBOARD CHARTS */
+.chart-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+  
+.chart-container {
+    width: 100%;
+    max-width: 400px;
+    height: 280px;
+    min-height: 280px;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+/* CHATBOT FLOAT BUTTON */
+#chatbot-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: #c62828;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.6rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 999;
+}
+  
+#chatbot-btn:hover {
+    background-color: #b71c1c;
+}
+
+/* --- NEW: Chatbot Container Tweaks --- */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 120px); /* Header + Footer combined */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.chat-box {
+    flex-grow: 1;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    background-color: #fdfdfd;
+    min-height: 150px;
+    max-height: 300px;
+}
+
+
+.chat-input-section {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.chat-input-section input {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.chat-input-section button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #c62828;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}

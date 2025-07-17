@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Employee List</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <img src="https://accrevent.com/wp-content/uploads/2024/02/Accrevent-Black-logo-2048x621.png" class="logo" />
+    <h1 class="app-title">SmartHire Employees</h1>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="create.html">New Onboarding</a>
+      <a href="list.html">View Employees</a>
+      <a href="dashboard.html">Dashboards</a>
+      <a href="chatbot.html">Chat Assistant</a>
+    </div>
+  </header>
+
+  <h1 class="app-title">All Onboarded Employees</h1>
+
+  <table id="employeeTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Join Date</th>
+        <th>Status</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <p id="message"></p>
+
+  <button id="chatbot-btn" onclick="window.location.href='chatbot.html'">💬</button>
+
+  <footer>
+    © Accrevent SmartHire 2025 | All rights reserved
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("navMenu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+  </script>
+  <script src="js/list.js"></script>
+</body>
+</html>

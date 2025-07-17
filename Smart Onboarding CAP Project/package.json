@@ -1,0 +1,43 @@
+{
+  "name": "smart-onboard-demo",
+  "version": "1.0.0",
+  "description": "SmartHire CAP app",
+  "private": true,
+  "scripts": {
+    "start": "cds-serve",
+    "dev": "cds watch"
+  },
+  "dependencies": {
+    "@sap/cds": "^8.9.4",
+    "@sap/xssec": "^4.8.0",
+    "dotenv": "^17.0.1",
+    "express": "^4",
+    "openai": "^5.8.2"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.10.0",
+    "@cap-js/sqlite": "^1.11.1",
+    "@sap/cds-dk": "^8"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "model": "db",
+        "credentials": {
+          "database": "sqlite.db"
+        }
+      }
+    },
+    "build": {
+      "target": "sqlite"
+    },
+    "hana": {
+      "deploy-format": "hdbcds"
+    },
+    "model": [
+      "db",
+      "srv"
+    ]
+}
+}

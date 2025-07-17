@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>New Onboarding</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <img src="https://accrevent.com/wp-content/uploads/2024/02/Accrevent-Black-logo-2048x621.png" class="logo" />
+    <h1 class="app-title">SmartHire Onboarding</h1>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="create.html">New Onboarding</a>
+      <a href="list.html">View Employees</a>
+      <a href="dashboard.html">Dashboards</a>
+      <a href="chatbot.html">Chat Assistant</a>
+    </div>
+  </header>
+
+  <h1 class="app-title">New Employee Onboarding</h1>
+
+  <form id="onboardForm">
+    <input type="text" id="name" placeholder="Full Name" required /><br />
+    <input type="email" id="email" placeholder="Email Address" required /><br />
+    <input type="text" id="department" placeholder="Department" required /><br />
+    <input type="date" id="joinDate" placeholder="Joining Date" required /><br />
+    <input type="file" id="resume" accept=".pdf,.txt" required /><br /><br />
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="message"></p>
+
+  <button id="chatbot-btn" onclick="window.location.href='chatbot.html'">💬</button>
+
+  <footer>
+    © Accrevent SmartHire 2025 | All rights reserved
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("navMenu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+  </script>
+  <script src="js/create.js"></script>
+</body>
+</html>
